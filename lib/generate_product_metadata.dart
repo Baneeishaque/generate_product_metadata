@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:generate_product_metadata/ProductJsonModal.dart';
 import 'package:path/path.dart';
 
 int calculate() {
@@ -28,6 +30,8 @@ void printDirectoryContents({String operation = "Check"}) {
               FileSystemEntityType.notFound) {
             print(
                 "\"${basename(categoryFolder.path)}\\${basename(productFolder.path)}\" Doesn't Contain product.json");
+          }else{
+            ProductJsonModal.fromJson(jsonDecode(File("${productFolder.path}\\product.json").readAsStringSync()));
           }
           if (FileSystemEntity.typeSync("${productFolder.path}\\images") ==
               FileSystemEntityType.notFound) {
